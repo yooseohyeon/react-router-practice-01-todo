@@ -15,7 +15,11 @@ const NotFound = () => {
       </p>
       <p>존재하지 않는 페이지입니다.</p>
       {/* TODO 17: 홈으로 돌아가는 버튼을 만드세요 */}
-      <button className="btn btn-primary" style={{ marginTop: "16px" }}>
+      <button
+        className="btn btn-primary"
+        style={{ marginTop: "16px" }}
+        onClick={() => navigate("/")}
+      >
         홈으로 돌아가기
       </button>
     </div>
