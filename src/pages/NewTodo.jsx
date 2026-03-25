@@ -1,14 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewTodo = ({ addTodo }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   // TODO 13: useNavigate를 사용하세요
+  const navigate = useNavigate();
 
   // TODO 14: addTodo 호출 후 목록 페이지로 이동하세요
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const newTodo = {
+      title: title,
+      description: description,
+      done: false,
+    };
+
+    await addTodo(newTodo);
+    navigate("/todos");
   };
 
   return (
