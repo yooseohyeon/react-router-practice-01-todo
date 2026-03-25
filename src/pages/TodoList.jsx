@@ -1,11 +1,21 @@
+import { useSearchParams } from "react-router-dom";
+
 const TodoList = ({ todos, toggleTodo }) => {
   // TODO 5: useSearchParams로 URL 검색 파라미터를 관리하세요
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keyword = searchParams.get("keyword") || "";
+
   // TODO 6: keyword에 따라 todos를 필터링하세요
-  const filteredTodos = todos;
+  const filteredTodos = todos.filter(
+    (todo) =>
+      todo.title.toLowerCase().includes(keyword.toLowerCase()) ||
+      todo.description.toLowerCase().includes(keyword.toLowerCase()),
+  );
 
   // TODO 7: 검색어 변경 시 URL의 searchParams를 업데이트하세요
   const handleSearch = (e) => {
     const value = e.target.value;
+    setSearchParams({ keyword: value });
   };
 
   return (
@@ -14,6 +24,8 @@ const TodoList = ({ todos, toggleTodo }) => {
 
       <input
         type="text"
+        id="todo-search"
+        name="keyword"
         className="search-input"
         placeholder="할 일 검색..."
         onChange={handleSearch}
