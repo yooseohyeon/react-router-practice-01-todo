@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 const TodoList = ({ todos, toggleTodo }) => {
   // TODO 5: useSearchParams로 URL 검색 파라미터를 관리하세요
@@ -49,7 +49,9 @@ const TodoList = ({ todos, toggleTodo }) => {
               {todo.title}
             </span>
             {/* TODO 8: 상세 페이지로 이동하는 Link를 만드세요 */}
-            <span style={{ color: "#2196f3", fontSize: "14px" }}>상세</span>
+            <Link to={`/todos/${todo.id}`} style={{ textDecoration: "none" }}>
+              <span style={{ color: "#2196f3", fontSize: "14px" }}>상세</span>
+            </Link>
           </div>
         ))
       )}
