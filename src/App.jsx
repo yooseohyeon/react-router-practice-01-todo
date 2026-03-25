@@ -100,7 +100,9 @@ const App = () => {
               element={<TodoDetail todos={todos} deleteTodo={deleteTodo} />}
             />
           </Route>
+
           {/* TODO 4: 404 처리 라우트 */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </div>
