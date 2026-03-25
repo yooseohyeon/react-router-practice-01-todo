@@ -9,8 +9,12 @@ import TodoDetail from "./pages/TodoDetail";
 import NewTodo from "./pages/NewTodo";
 import NotFound from "./pages/NotFound";
 
+import { Toast } from "./components/Toast";
+import { useToast } from "./hooks/useToast";
+
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const { toast, showToast } = useToast();
 
   useEffect(() => {
     fetch("http://localhost:4000/todos")
@@ -97,7 +101,13 @@ const App = () => {
             <Route path="new" element={<NewTodo addTodo={addTodo} />} />
             <Route
               path=":id"
-              element={<TodoDetail todos={todos} deleteTodo={deleteTodo} />}
+              element={
+                <TodoDetail
+                  todos={todos}
+                  deleteTodo={deleteTodo}
+                  showToast={showToast}
+                />
+              }
             />
           </Route>
 
@@ -105,6 +115,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Toast toast={toast} />
     </div>
   );
 };
