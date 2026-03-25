@@ -32,8 +32,12 @@ const TodoDetail = ({ todos, deleteTodo }) => {
 
       <div className="btn-group">
         {/* TODO 12: 각 버튼에 적절한 navigate 동작을 연결하세요 */}
-        <button className="btn btn-primary">목록으로</button>
-        <button className="btn btn-secondary">뒤로가기</button>
+        <button className="btn btn-primary" onClick={() => navigate("/todos")}>
+          목록으로
+        </button>
+        <button className="btn btn-secondary" onClick={() => navigate(-1)}>
+          뒤로가기
+        </button>
         <button
           className="btn btn-danger"
           onClick={() => handleDelete(todo.id)}
