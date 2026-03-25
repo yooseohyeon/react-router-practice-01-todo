@@ -14,8 +14,8 @@ export const TodoItem = ({ todo, toggleTodo }) => {
         {todo.title}
       </span>
       {/* TODO 8: 상세 페이지로 이동하는 Link를 만드세요 */}
-      <Link to={`/todos/${todo.id}`} style={{ textDecoration: "none" }}>
-        <span style={{ color: "#2196f3", fontSize: "14px" }}>상세</span>
+      <Link to={`/todos/${todo.id}`} className="detail-link">
+        <span>상세</span>
       </Link>
     </li>
   );
