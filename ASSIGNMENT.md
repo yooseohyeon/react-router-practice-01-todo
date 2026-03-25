@@ -1,131 +1,111 @@
-# 과제: 과일 가게 장바구니 만들기
-
-## 목표
-
-`react-router-dom`의 `Link`를 활용한 페이지 이동과, **최상위 컴포넌트(App)에서 선언한 state를 여러 페이지에 props로 전달**하는 방법을 익힙니다.
-
-## 완성 화면
-
-| 페이지 | 경로 | 설명 |
-|--------|------|------|
-| 과일 목록 | `/` | 전체 과일을 보여주고, "장바구니 담기" 버튼으로 추가 |
-| 장바구니 | `/about` | 장바구니에 담긴 과일을 보여주고, "제거" 버튼으로 삭제 |
-| 주문 요약 | `/contact` | 장바구니의 총 개수와 총 가격을 보여줌 |
-
-> 세 페이지 모두 **동일한 장바구니(cart) state**를 사용합니다.
-> 과일 목록에서 담은 과일이 장바구니 페이지와 주문 요약 페이지에 바로 반영되어야 합니다.
-
----
-
-## 이미 준비된 것 (건드리지 않아도 됩니다)
-
-- `main.jsx`: `BrowserRouter` 설정
-- `App.jsx`: 라우터 설정 (`Routes`, `Route`, `Link`), 과일 데이터 (`FRUITS`)
-- `App.css` / `index.css`: 기본 스타일 (`.fruit-card`, `.btn-add`, `.btn-remove`, `.empty-message`, `.summary-box`)
-
----
-
-## 해야 할 일 (TODO 순서대로)
-
-### TODO 1 — `App.jsx`: useState로 장바구니 state 선언
-
-```jsx
-// 파일 최상단에 useState를 import하세요
-import { useState } from "react";
-
-// App 컴포넌트 안에서 state를 선언하세요
-const [cart, setCart] = useState([]);
-```
-
-### TODO 2 — `App.jsx`: addToCart 함수 만들기
-
-- `fruit` 객체를 파라미터로 받습니다.
-- 이미 장바구니에 있는 과일이면 추가하지 않습니다. (`id`로 비교)
-- **힌트**: `some()` 또는 `find()`로 중복 체크 후 `setCart([...cart, fruit])`
-
-### TODO 3 — `App.jsx`: removeFromCart 함수 만들기
-
-- `fruitId`를 파라미터로 받습니다.
-- `filter()`를 사용하여 해당 id의 과일을 제거합니다.
-
-### TODO 4 — `App.jsx`: 각 페이지에 props 전달하기
-
-Route의 `element`에서 컴포넌트에 props를 전달하세요.
-
-```jsx
-<Route path="/" element={<Home fruits={???} onAddToCart={???} />} />
-<Route path="/about" element={<About cart={???} onRemoveFromCart={???} />} />
-<Route path="/contact" element={<Contact cart={???} />} />
-```
-
-### TODO 5 — `pages/Home.jsx`: 과일 목록 렌더링
-
-- `fruits`와 `onAddToCart`를 props로 받습니다.
-- `fruits.map()`으로 과일 카드를 렌더링합니다.
-- 각 카드에는 이모지, 이름, 가격, "장바구니 담기" 버튼이 있어야 합니다.
-
-**예시 구조:**
-```jsx
-<div className="fruit-card" key={fruit.id}>
-  <span>{fruit.emoji} {fruit.name} — {fruit.price}원</span>
-  <button className="btn-add" onClick={() => onAddToCart(fruit)}>
-    장바구니 담기
-  </button>
-</div>
-```
-
-### TODO 6 — `pages/About.jsx`: 장바구니 렌더링
-
-- `cart`와 `onRemoveFromCart`를 props로 받습니다.
-- `cart`가 비어있으면 `<p className="empty-message">장바구니가 비어있습니다</p>`를 보여줍니다.
-- `cart.map()`으로 장바구니 아이템을 렌더링합니다.
-- 각 아이템에 "제거" 버튼(`className="btn-remove"`)을 추가합니다.
-
-### TODO 7 — `pages/Contact.jsx`: 주문 요약 렌더링
-
-- `cart`를 props로 받습니다.
-- 장바구니가 비어있으면 `<p className="empty-message">장바구니에 담긴 상품이 없습니다</p>`를 보여줍니다.
-- 비어있지 않으면 다음 정보를 보여줍니다:
-  - 총 상품 수: `cart.length`
-  - 총 가격: `reduce()`를 사용하여 계산
-- **힌트**: `cart.reduce((sum, fruit) => sum + fruit.price, 0)`
-
-**예시 구조:**
-```jsx
-<div className="summary-box">
-  <p>총 상품 수: {cart.length}개</p>
-  <p>총 가격: {총가격}원</p>
-</div>
-```
-
----
-
-## 핵심 개념 정리
-
-```
-App (useState로 cart 선언)
- ├── Home   ← fruits, addToCart를 props로 전달
- ├── About  ← cart, removeFromCart를 props로 전달
- └── Contact ← cart를 props로 전달
-```
-
-- **state 끌어올리기 (Lifting State Up)**: 여러 페이지에서 공유할 데이터는 공통 부모(App)에서 관리합니다.
-- **props 전달**: Route의 `element`에서 `<Component prop={value} />` 형태로 전달합니다.
-- **Link 컴포넌트**: `<a>` 태그 대신 `<Link to="/">`를 사용하면 페이지 새로고침 없이 이동합니다.
-
----
+# 과제: Todo List with React Router
 
 ## 실행 방법
 
+터미널 2개를 열어주세요:
+
 ```bash
+# 터미널 1: React 개발 서버
 npm run dev
+
+# 터미널 2: json-server (API 서버, http://localhost:4000)
+npm run server
 ```
+
+---
+
+## 라우팅 구조
+
+```
+/              → Home (대시보드)          ✅ 완성됨
+/todos         → TodosLayout > TodoList  ← 과제
+/todos/new     → TodosLayout > NewTodo   ← 과제
+/todos/:id     → TodosLayout > TodoDetail← 과제
+존재하지않는경로 → NotFound (404)          ← 과제
+```
+
+---
+
+## 이미 완성된 것
+
+- `App.jsx` — 라우팅 구조, `useState`로 todos 선언, `useEffect`로 초기 fetch
+- `Home.jsx` — todos를 props로 받아 통계 표시 (참고용)
+- `TodosLayout.jsx` — 중첩 라우팅의 `Outlet` 사용 예시 (참고용)
+- `db.json` — json-server 초기 데이터
+- 스타일 전부
+
+---
+
+## json-server API
+
+| 메서드 | URL | body 예시 |
+|--------|-----|-----------|
+| GET | `/todos` | — |
+| GET | `/todos/3` | — |
+| POST | `/todos` | `{ "title": "...", "done": false }` |
+| PATCH | `/todos/3` | `{ "done": true }` |
+| DELETE | `/todos/3` | — |
+
+> 모든 요청의 base URL은 `http://localhost:4000` 입니다.
+> POST, PATCH 요청에는 `Content-Type: application/json` 헤더가 필요합니다.
+
+---
+
+## 해야 할 일
+
+### `App.jsx` — TODO 1~4
+
+| TODO | 할 일 |
+|------|-------|
+| 1 | `addTodo` — POST로 새 할 일을 저장하고, 응답 데이터를 state에 추가 |
+| 2 | `toggleTodo` — 해당 todo의 done 값을 반전시켜 PATCH하고, state도 업데이트 |
+| 3 | `deleteTodo` — DELETE로 삭제하고, state에서도 제거 |
+| 4 | 존재하지 않는 경로를 처리하는 Route 추가 |
+
+### `TodoList.jsx` — TODO 5~8
+
+| TODO | 할 일 | 사용할 것 |
+|------|-------|-----------|
+| 5 | URL의 `?keyword=` 값으로 검색 기능 구현 | `useSearchParams` |
+| 6 | keyword에 따라 todos 필터링 | `filter`, `includes` |
+| 7 | 검색어 입력 시 URL 파라미터 업데이트 | `setSearchParams` |
+| 8 | "상세" 텍스트를 클릭하면 `/todos/:id`로 이동 | `Link` |
+
+### `TodoDetail.jsx` — TODO 9~12
+
+| TODO | 할 일 | 사용할 것 |
+|------|-------|-----------|
+| 9 | 페이지 이동 기능 추가 | `useNavigate` |
+| 10 | todos 배열에서 URL의 id에 해당하는 todo 찾기 | `useParams`, `find` |
+| 11 | 삭제 버튼: 삭제 후 목록으로 이동 | `deleteTodo`, `navigate` |
+| 12 | "목록으로"는 `/todos`로, "뒤로가기"는 이전 페이지로 | `navigate` |
+
+> 주의: `useParams()`로 가져온 값은 항상 **문자열**입니다.
+
+### `NewTodo.jsx` — TODO 13~14
+
+| TODO | 할 일 | 사용할 것 |
+|------|-------|-----------|
+| 13 | 페이지 이동 기능 추가 | `useNavigate` |
+| 14 | 폼 제출 시 addTodo 호출 후 목록으로 이동 | `addTodo`, `navigate` |
+
+### `NotFound.jsx` — TODO 15~17
+
+| TODO | 할 일 | 사용할 것 |
+|------|-------|-----------|
+| 15 | 현재 경로 정보 + 이동 기능 가져오기 | `useLocation`, `useNavigate` |
+| 16 | 사용자가 접속 시도한 잘못된 경로를 화면에 표시 | `location.pathname` |
+| 17 | 버튼 클릭 시 홈으로 이동 | `navigate` |
+
+---
 
 ## 체크리스트
 
-- [ ] 과일 목록 페이지에서 "장바구니 담기" 버튼을 누르면 장바구니에 추가된다
-- [ ] 같은 과일을 두 번 누르면 중복 추가되지 않는다
-- [ ] 장바구니 페이지로 이동하면 담은 과일이 보인다
-- [ ] 장바구니에서 "제거" 버튼을 누르면 해당 과일이 사라진다
-- [ ] 주문 요약 페이지에서 총 개수와 총 가격이 정확하게 표시된다
-- [ ] 장바구니가 비어있을 때 적절한 안내 메시지가 표시된다
+- [ ] 할 일 추가 → json-server에 저장되고 화면에 나타남
+- [ ] 체크박스 클릭 → 완료 상태 토글
+- [ ] 삭제 → json-server에서 삭제되고 화면에서 사라짐
+- [ ] 검색 → URL이 `?keyword=...`로 바뀌고 필터링됨
+- [ ] "상세" 클릭 → `/todos/:id`로 이동, 해당 할 일 정보 표시
+- [ ] "목록으로" / "뒤로가기" 버튼 동작
+- [ ] 존재하지 않는 URL → 404 페이지 + 잘못된 경로 표시
+- [ ] "홈으로 돌아가기" 버튼 동작

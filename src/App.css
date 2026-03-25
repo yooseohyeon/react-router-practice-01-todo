@@ -1,64 +1,249 @@
-nav a {
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* 헤더 */
+.header {
+  background-color: #2196f3;
+  color: white;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* 네비게이션 */
+.nav {
+  display: flex;
+  gap: 4px;
+  padding: 8px 20px;
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.nav-link {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: #666;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 15px;
 }
 
-nav a:hover {
-  background-color: #e8f5e9;
+.nav-link:hover {
+  background: #e3f2fd;
 }
 
-.fruit-card {
+.nav-link.active {
+  color: #2196f3;
+  font-weight: bold;
+  background: #e3f2fd;
+}
+
+/* 메인 컨텐츠 */
+.main {
+  padding: 20px;
+}
+
+/* 홈 대시보드 */
+.dashboard {
+  display: flex;
+  gap: 12px;
+}
+
+.stat-card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.stat-card.total {
+  background: #e3f2fd;
+}
+
+.stat-card.active {
+  background: #fff3e0;
+}
+
+.stat-card.done {
+  background: #e8f5e9;
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* 서브 네비게이션 (TodosLayout) */
+.sub-nav {
+  display: flex;
+  gap: 4px;
+  padding: 10px 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Todo 리스트 */
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.todo-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  margin-bottom: 8px;
+  gap: 12px;
+  padding: 14px 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  margin-bottom: 8px;
 }
 
-.fruit-card span {
-  font-size: 18px;
+.todo-item.done {
+  opacity: 0.5;
 }
 
-.fruit-card button {
-  padding: 6px 14px;
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-title {
+  flex: 1;
+  font-size: 16px;
+}
+
+.todo-title.done {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.detail-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.detail-link:hover {
+  text-decoration: underline;
+}
+
+/* 상세 페이지 */
+.detail-box {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+/* 폼 */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form input,
+.form textarea {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 버튼 */
+.btn {
+  padding: 8px 18px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-}
-
-.btn-add {
-  background-color: #4CAF50;
   color: white;
 }
 
-.btn-add:hover {
-  background-color: #388E3C;
+.btn-primary {
+  background: #2196f3;
 }
 
-.btn-remove {
-  background-color: #f44336;
-  color: white;
+.btn-primary:hover {
+  background: #1976d2;
 }
 
-.btn-remove:hover {
-  background-color: #d32f2f;
+.btn-success {
+  background: #4caf50;
 }
 
-.empty-message {
+.btn-success:hover {
+  background: #388e3c;
+}
+
+.btn-danger {
+  background: #f44336;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+}
+
+.btn-secondary {
+  background: #9e9e9e;
+}
+
+.btn-secondary:hover {
+  background: #757575;
+}
+
+/* 빈 상태 */
+.empty {
+  text-align: center;
   color: #999;
-  font-style: italic;
-  padding: 20px 0;
+  padding: 40px 0;
 }
 
-.summary-box {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+/* NotFound */
+.not-found {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.not-found h1 {
+  font-size: 72px;
+  margin: 0;
+  color: #ddd;
+}
+
+.not-found .path {
+  color: #f44336;
+  font-family: monospace;
+  background: #fff3f3;
+  padding: 4px 10px;
+  border-radius: 4px;
 }

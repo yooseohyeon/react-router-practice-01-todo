@@ -1,13 +1,33 @@
-// TODO 5: props를 받아서 과일 목록을 렌더링하세요
-//         - fruits: 전체 과일 배열
-//         - onAddToCart: 장바구니 추가 함수
-const Home = () => {
+// ============================================
+// 이 파일은 이미 완성되어 있습니다.
+// App에서 todos를 props로 받아 통계를 보여주는 예시입니다.
+//
+// 핵심: App의 useState로 선언한 todos가
+// Home, TodoList, TodoDetail 등 여러 페이지에서 공유됩니다.
+// ============================================
+
+const Home = ({ todos }) => {
+  const totalCount = todos.length;
+  const activeCount = todos.filter((t) => !t.done).length;
+  const doneCount = todos.filter((t) => t.done).length;
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>과일 목록</h2>
-      {/* TODO: fruits 배열을 map으로 순회하며 과일 카드를 렌더링하세요 */}
-      {/* 각 카드에는 이모지, 이름, 가격, "장바구니 담기" 버튼이 있어야 합니다 */}
-      <p>여기에 과일 목록을 렌더링하세요</p>
+    <div>
+      <h2>대시보드</h2>
+      <div className="dashboard">
+        <div className="stat-card total">
+          <p className="stat-number">{totalCount}</p>
+          <p className="stat-label">전체</p>
+        </div>
+        <div className="stat-card active">
+          <p className="stat-number">{activeCount}</p>
+          <p className="stat-label">진행중</p>
+        </div>
+        <div className="stat-card done">
+          <p className="stat-number">{doneCount}</p>
+          <p className="stat-label">완료</p>
+        </div>
+      </div>
     </div>
   );
 };

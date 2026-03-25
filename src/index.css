@@ -4,12 +4,3 @@ body {
   color: #333;
   background: #fff;
 }
-
-#root {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h1, h2 {
-  font-weight: 600;
-}

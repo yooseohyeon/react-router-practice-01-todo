@@ -1,0 +1,40 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "리액트 공부하기",
+      "description": "useState, useEffect 복습하고 예제 만들어보기",
+      "done": false
+    },
+    {
+      "id": 2,
+      "title": "장보기",
+      "description": "우유, 계란, 빵 사오기",
+      "done": false
+    },
+    {
+      "id": 3,
+      "title": "운동하기",
+      "description": "30분 러닝 + 스트레칭",
+      "done": true
+    },
+    {
+      "id": 4,
+      "title": "라우터 과제 완료",
+      "description": "react-router-dom 실습 과제 제출하기",
+      "done": false
+    },
+    {
+      "id": 5,
+      "title": "이메일 확인",
+      "description": "중요 메일 회신하기",
+      "done": true
+    },
+    {
+      "id": 6,
+      "title": "방 청소",
+      "description": "책상 정리하고 청소기 돌리기",
+      "done": false
+    }
+  ]
+}
