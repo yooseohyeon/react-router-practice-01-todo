@@ -35,9 +35,11 @@ const TodoList = ({ todos, toggleTodo }) => {
       {filteredTodos.length === 0 ? (
         <p className="empty">검색 결과가 없습니다.</p>
       ) : (
-        filteredTodos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
-        ))
+        <ul className="todo-list">
+          {filteredTodos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+          ))}
+        </ul>
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const TodoItem = ({ todo, toggleTodo }) => {
   return (
-    <div className={todo.done ? "todo-item done" : "todo-item"}>
+    <li className={todo.done ? "todo-item done" : "todo-item"}>
       <input
         type="checkbox"
         className="todo-checkbox"
@@ -17,6 +17,6 @@ export const TodoItem = ({ todo, toggleTodo }) => {
       <Link to={`/todos/${todo.id}`} style={{ textDecoration: "none" }}>
         <span style={{ color: "#2196f3", fontSize: "14px" }}>상세</span>
       </Link>
-    </div>
+    </li>
   );
 };
