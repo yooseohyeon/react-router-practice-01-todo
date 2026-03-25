@@ -273,3 +273,66 @@
 .toast.error {
   background-color: #f44336;
 }
+
+/* Confirm */
+.confirm-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.confirm {
+  width: 320px;
+  max-width: 90%;
+  padding: 20px 50px;
+  text-align: center;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.confirm p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.confirm button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.confirm button:first-child {
+  background: #2196f3;
+  color: white;
+}
+
+.confirm button:first-child:hover {
+  background: #1976d2;
+}
+
+.confirm button:last-child {
+  background: #e0e0e0;
+}
+
+.confirm button:last-child:hover {
+  background: #d5d5d5;
+}

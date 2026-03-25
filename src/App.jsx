@@ -11,10 +11,13 @@ import NotFound from "./pages/NotFound";
 
 import { Toast } from "./components/Toast";
 import { useToast } from "./hooks/useToast";
+import { Confirm } from "./components/Confirm";
+import { useConfirm } from "./hooks/useConfirm";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const { toast, showToast } = useToast();
+  const { confirm, showConfirm, handleConfirm, handleCancel } = useConfirm();
 
   useEffect(() => {
     fetch("http://localhost:4000/todos")
@@ -106,6 +109,7 @@ const App = () => {
                   todos={todos}
                   deleteTodo={deleteTodo}
                   showToast={showToast}
+                  showConfirm={showConfirm}
                 />
               }
             />
@@ -115,7 +119,13 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+
       <Toast toast={toast} />
+      <Confirm
+        confirm={confirm}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
     </div>
   );
 };

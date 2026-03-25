@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 
-const TodoDetail = ({ todos, deleteTodo, showToast }) => {
+const TodoDetail = ({ todos, deleteTodo, showToast, showConfirm }) => {
   const { id } = useParams();
   // TODO 9: useNavigate를 사용하세요
   const navigate = useNavigate();
@@ -10,14 +10,18 @@ const TodoDetail = ({ todos, deleteTodo, showToast }) => {
 
   // TODO 11: 삭제 후 목록 페이지로 이동하는 핸들러를 만드세요
   const handleDelete = async (id) => {
-    if (window.confirm(`"${todo.title}" 할 일을 삭제하시겠습니까?`)) {
-      try {
-        await deleteTodo(id);
-        showToast("삭제되었습니다", "success", 2000);
-        navigate("/todos");
-      } catch (error) {
-        showToast("삭제 중 오류가 발생했습니다", "error");
-      }
+    const confirmed = await showConfirm(
+      `"${todo.title}" 할 일을 삭제하시겠습니까?`,
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await deleteTodo(id);
+      showToast("삭제되었습니다", "success", 2000);
+      navigate("/todos");
+    } catch (error) {
+      showToast("삭제 중 오류가 발생했습니다", "error");
     }
   };
 
