@@ -19,13 +19,47 @@ const App = () => {
   }, []);
 
   // TODO 1: addTodo 함수 (POST 요청 → setTodos)
-  const addTodo = async (newTodo) => {};
+  const addTodo = async (newTodo) => {
+    const res = await fetch("http://localhost:4000/todos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTodo),
+    });
+    const data = await res.json();
+
+    setTodos((prev) => [...prev, data]);
+  };
 
   // TODO 2: toggleTodo 함수 (PATCH 요청 → setTodos)
-  const toggleTodo = async (id) => {};
+  const toggleTodo = async (id) => {
+    const targetTodo = todos.find((todo) => todo.id === id);
+
+    const res = await fetch(`http://localhost:4000/todos/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ done: !targetTodo.done }),
+    });
+
+    const data = await res.json();
+    setTodos((prev) => prev.map((todo) => (todo.id === id ? data : todo)));
+  };
 
   // TODO 3: deleteTodo 함수 (DELETE 요청 → setTodos)
-  const deleteTodo = async (id) => {};
+  const deleteTodo = async (id) => {
+    const res = await fetch(`http://localhost:4000/todos/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    } else {
+      alert("삭제에 실패했습니다.");
+    }
+  };
 
   return (
     <div className="app">
@@ -35,14 +69,18 @@ const App = () => {
       <nav className="nav">
         <NavLink
           to="/"
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
           end
         >
           홈
         </NavLink>
         <NavLink
           to="/todos"
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
         >
           할 일 목록
         </NavLink>
